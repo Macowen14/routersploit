@@ -83,7 +83,11 @@ class SSHCli:
         """
 
         if "DSA PRIVATE KEY" in priv_key:
-            priv_key = paramiko.DSSKey.from_private_key(io.StringIO(priv_key))
+            if hasattr(paramiko, "DSSKey"):
+                priv_key = paramiko.DSSKey.from_private_key(io.StringIO(priv_key))
+            else:
+                print_error(self.peer, "DSA keys are no longer supported by the installed paramiko version", verbose=self.verbosity)
+                return False
         elif "RSA PRIVATE KEY" in priv_key:
             priv_key = paramiko.RSAKey.from_private_key(io.StringIO(priv_key))
         else:

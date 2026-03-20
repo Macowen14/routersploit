@@ -35,7 +35,7 @@ class Exploit(HTTPClient):
         print_status("Starting default credentials attack against Acti Camera Web Interface")
 
         data = LockedIterator(self.defaults)
-        print(data.next())
+        print(next(data))
         self.run_threads(self.threads, self.target_function, data)
 
         if self.credentials:
@@ -48,7 +48,7 @@ class Exploit(HTTPClient):
     def target_function(self, running, creds):
         while running.is_set():
             try:
-                username, password = creds.next().split(":", 1)
+                username, password = next(creds).split(":", 1)
 
                 data = {
                     "LOGIN_ACCOUNT": username,

@@ -48,7 +48,7 @@ class Exploit(SNMPClient):
     def target_function(self, running, data):
         while running.is_set():
             try:
-                community_string = data.next()
+                community_string = next(data)
 
                 snmp_client = self.snmp_create()
                 if snmp_client.get(community_string, "1.3.6.1.2.1.1.1.0", version=self.version):

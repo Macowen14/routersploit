@@ -87,7 +87,7 @@ class Exploit(TCPClient):
             username = ""
             passsword = ""
             try:
-                username, password = creds.next().split(":", 1)
+                username, password = next(creds).split(":", 1)
                 if self.login(username, password) and self.stop_on_success:
                     running.clear()
             except RuntimeError:

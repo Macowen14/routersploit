@@ -119,7 +119,7 @@ class Exploit(Exploit):
     def exploits_target_function(self, running, data):
         while running.is_set():
             try:
-                module = data.next()
+                module = next(data)
                 exploit = module()
             except StopIteration:
                 break
@@ -186,7 +186,7 @@ class Exploit(Exploit):
     def creds_target_function(self, running, data):
         while running.is_set():
             try:
-                module = data.next()
+                module = next(data)
                 exploit = module()
 
                 generic = False
